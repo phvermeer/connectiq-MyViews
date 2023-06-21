@@ -8,11 +8,11 @@ module MyViews{
         function onTap(clickEvent as WatchUi.ClickEvent) as Lang.Boolean;
     };
 
-    class MyViewDelegate extends WatchUi.InputDelegate{
+    class MyViewDelegate extends WatchUi.BehaviorDelegate{
         hidden var mView as IMyView;
 
         function initialize(view as IMyView){
-            InputDelegate.initialize();
+            BehaviorDelegate.initialize();
             mView = view;
         }
 
