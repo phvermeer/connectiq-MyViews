@@ -7,15 +7,15 @@ module MyViews{
             View.initialize();
         }
 
-        function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean{
+        function onKey(sender as MyViewDelegate, keyEvent as WatchUi.KeyEvent) as Lang.Boolean{
             return false;
         }
 
-        function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Lang.Boolean{
+        function onSwipe(sender as MyViewDelegate, swipeEvent as WatchUi.SwipeEvent) as Lang.Boolean{
             return false;
         }
 
-        function onTap(clickEvent as WatchUi.ClickEvent) as Lang.Boolean{
+        function onTap(sender as MyViewDelegate, clickEvent as WatchUi.ClickEvent) as Lang.Boolean{
             return false;
         }
     }    
