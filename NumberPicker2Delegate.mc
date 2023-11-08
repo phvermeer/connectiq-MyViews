@@ -43,7 +43,6 @@ module MyViews{
                     if(v<0){
                         v+=10;
                     }
-                    System.println(Lang.format("number=$1$", [v]));
                     picker.value *= 10;
                     picker.value += v;
                     WatchUi.requestUpdate();
