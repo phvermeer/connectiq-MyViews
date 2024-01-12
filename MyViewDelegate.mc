@@ -7,15 +7,8 @@ module MyBarrel{
         class MyViewDelegate extends WatchUi.BehaviorDelegate{
             hidden var weakView as WeakReference?;
 
-            function initialize(
-                options as {
-                    :view as MyView
-                }
-            ){
+            function initialize(){
                 BehaviorDelegate.initialize();
-                if(options.hasKey(:view)){
-                    weakView = (options.get(:view) as MyView).weak();
-                }
             }
 
             function setView(view as MyView) as Void{

@@ -6,27 +6,17 @@ module MyBarrel{
     module Views{
         class MyView extends WatchUi.View{
             private var visible as Boolean = false;
-            private var weakDelegate as WeakReference?;
+            private var weakDelegate as WeakReference;
 
-            function initialize(
-                options as {
-                    :delegate as MyViewDelegate,
-                }
-            ){
+            function initialize(delegate as MyViewDelegate){
                 View.initialize();
 
-                if(options.hasKey(:delegate)){
-                    weakDelegate = (options.get(:delegate) as MyViewDelegate).weak();
-                }
+                weakDelegate = delegate.weak();
+                delegate.setView(self);
             }
 
-            function setDelegate(delegate as MyViewDelegate) as Void{
-                weakDelegate = delegate.weak();
-            }
             function getDelegate() as MyViewDelegate?{
-                return (weakDelegate != null)
-                    ? weakDelegate.get() as MyViewDelegate?
-                    : null;
+                return weakDelegate.get() as MyViewDelegate?;
             }
 
             function onKey(sender as MyViewDelegate, keyEvent as WatchUi.KeyEvent) as Lang.Boolean{
