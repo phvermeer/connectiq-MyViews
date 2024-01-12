@@ -1,31 +1,51 @@
 import Toybox.WatchUi;
-using Toybox.Lang;
+import Toybox.Lang;
 
 module MyBarrel{
     (:views)
     module Views{
         class MyViewDelegate extends WatchUi.BehaviorDelegate{
-            hidden var mView as MyView;
+            hidden var weakView as WeakReference?;
 
-            function initialize(view as MyView){
+            function initialize(
+                options as {
+                    :view as MyView
+                }
+            ){
                 BehaviorDelegate.initialize();
-                mView = view;
+                if(options.hasKey(:view)){
+                    weakView = (options.get(:view) as MyView).weak();
+                }
             }
-            function switchToView(view as MyView, transition as SlideType) as Void{
-                mView = view;
-                WatchUi.switchToView(view, self, transition);
+
+            function setView(view as MyView) as Void{
+                weakView = view.weak();
+            }
+            function getView() as MyView?{
+                return (weakView != null)
+                    ? weakView.get() as MyView?
+                    : null;
             }
 
             function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean{
-                return mView.onKey(self, keyEvent);
+                var view = getView();
+                return (view != null)
+                    ? view.onKey(self, keyEvent)
+                    : false;
             }
 
             function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Lang.Boolean{
-                return mView.onSwipe(self, swipeEvent);
+                var view = getView();
+                return (view != null)
+                    ? view.onSwipe(self, swipeEvent)
+                    : false;
             }
 
             function onTap(clickEvent as WatchUi.ClickEvent) as Lang.Boolean{
-                return mView.onTap(self, clickEvent);
+                var view = getView();
+                return (view != null)
+                    ? view.onTap(self, clickEvent)
+                    : false;
             }
         }    
     }

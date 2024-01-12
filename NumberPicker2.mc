@@ -1,7 +1,6 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
 import Toybox.Lang;
-import MyBarrel;
 
 module MyBarrel{
     (:views)
